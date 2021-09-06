@@ -1,0 +1,17 @@
+<!-- Start Pagination -->
+
+<div class="page-pagination text-center">
+    <ul>
+        {% if page_obj.has_previous %}
+            <li><a href="?page=1">&laquo; Первая</a></li>
+            <li><a href="?page={{ page_obj.previous_page_number }}">Предыдущая</a></li>
+            <li><a href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a></li>
+        {% endif %}
+        <li><a class="active" href="">{{ page_obj.number }}</a></li>
+        {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a></li>
+            <li><a href="?page={{ page_obj.next_page_number }}">Следующая</a></li>
+            <li><a href="?page={{ page_obj.paginator.num_pages }}">Последняя &raquo;</a></li>
+        {% endif %}
+    </ul>
+</div> <!-- End Pagination -->

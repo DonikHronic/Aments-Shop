@@ -1,0 +1,304 @@
+{% extends 'aments_shop/base.html' %} <!-- ...:::: Start Hero Area Section:::... -->
+{% load static %}
+{% block content %}
+    <div class="hero-area">
+        <div class="hero-area-wrapper hero-slider-dots fix-slider-dots">
+            <!-- Start Hero Slider Single -->
+            <div class="hero-area-single">
+                <div class="hero-area-bg">
+                    <img class="hero-img" src="{% static 'images/slider_images/home_1/aments_home_1_slider_1.jpg' %}"
+                         alt="">
+                </div>
+                <div class="hero-content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-10 col-md-8 col-xl-6">
+                                <h5 style="color: #fff;">World Best Quality</h5>
+                                <h2 style="color: #fff;">New Car Parts</h2>
+                                <p style="color: #fff;">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do eiu
+                                </p>
+                                <a href="product_detail.html" class="hero-button">Shopping Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- End Hero Slider Single -->
+            <!-- Start Hero Slider Single -->
+            <div class="hero-area-single">
+                <div class="hero-area-bg">
+                    <img class="hero-img" src="{% static 'images/slider_images/home_1/aments_home_1_slider_2.jpg' %}"
+                         alt="">
+                </div>
+                <div class="hero-content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-10 col-md-8 col-xl-6">
+                                <h5 style="color: #fff;">World Best Quality</h5>
+                                <h2 style="color: #fff;">New Car Parts</h2>
+                                <p style="color: #fff;">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do eiu
+                                </p>
+                                <a href="product_detail.html" class="hero-button">Shopping Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- End Hero Slider Single -->
+        </div>
+    </div> <!-- ...:::: End Hero Area Section:::... -->
+
+    <!-- ...:::: Start ПОПУЛЯРНЫЕ КАТЕГОРИИ Section:::... -->
+    <div class="product-catagory-section section-top-gap-100">
+        <!-- Start Section Content -->
+        <div class="section-content-gap">
+            <div class="container">
+                <div class="row">
+                    <div class="section-content">
+                        <h3 class="section-title">Популярные категории</h3>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- End Section Content -->
+
+        <!-- Start Catagory Wrapper -->
+        <div class="product-catagory-wrapper">
+            <div class="container">
+                <div class="row" id="categories"></div>
+            </div>
+        </div> <!-- End Catagory Wrapper -->
+    </div> <!-- ...:::: End ПОПУЛЯРНЫЕ КАТЕГОРИИ Section:::... -->
+
+    <!-- ...:::: Start Banner Section:::... -->
+    <div class="banner-section section-top-gap-100">
+        <!-- Start Banner Wrapper -->
+        <div class="banner-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <!-- Start Banner Single -->
+                        <div class="banner-single">
+                            <a href="product_detail.html" class="banner-img-link">
+                                <img class="banner-img" src="../../static/images/banner_images/aments_banner_01.jpg"
+                                     alt="">
+                            </a>
+                            <div class="banner-content">
+                                <span class="banner-text-tiny">Car Wheel</span>
+                                <h3 class="banner-text-large">30% Off</h3>
+                                <a href="product_detail.html" class="banner-link">Shop Now</a>
+                            </div>
+                        </div> <!-- End Banner Single -->
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <!-- Start Banner Single -->
+                        <div class="banner-single">
+                            <a href="product_detail.html" class="banner-img-link">
+                                <img class="banner-img" src="../../static/images/banner_images/aments_banner_02.jpg"
+                                     alt="">
+                            </a>
+                            <div class="banner-content">
+                                <span class="banner-text-tiny">Car Vail's</span>
+                                <h3 class="banner-text-large">40% Off</h3>
+                                <a href="product_detail.html" class="banner-link">Shop Now</a>
+                            </div>
+                        </div> <!-- End Banner Single -->
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <!-- Start Banner Single -->
+                        <div class="banner-single">
+                            <a href="product_detail.html" class="banner-img-link">
+                                <img class="banner-img" src="../../static/images/banner_images/aments_banner_03.jpg"
+                                     alt="">
+                            </a>
+                            <div class="banner-content">
+                                <span class="banner-text-tiny">Car Vail's</span>
+                                <h3 class="banner-text-large">50% Off</h3>
+                                <a href="product_detail.html" class="banner-link">Shop Now</a>
+                            </div>
+                        </div> <!-- End Banner Single -->
+                    </div>
+                </div>
+            </div>
+        </div> <!-- End Banner Wrapper -->
+    </div> <!-- ...:::: End Banner Section:::... -->
+
+    <!-- ...:::: Start НОВЫЕ ПОСТАВКИ Section:::... -->
+    <div class="product-tab-section section-top-gap-100">
+        <!-- Start Section Content -->
+        <div class="section-content-gap">
+            <div class="container">
+                <div class="row">
+                    <div class="section-content d-flex justify-content-between align-items-md-center align-items-start flex-md-row flex-column">
+                        <h3 class="section-title">Новые поставки</h3>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- End Section Content -->
+
+        <!-- Start Tab Wrapper -->
+        <div class="product-tab-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="tab-content tab-animate-zoom">
+                            <div class="tab-pane show active" id="car_and_drive">
+                                <div id="new_products"
+                                     class="product-default-slider product-default-slider-4grids-1row">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- End Catagory Wrapper -->
+
+    </div> <!-- ...:::: Start НОВЫЕ ПОСТАВКИ Section:::... -->
+
+    <!-- ...:::: Start ПОУЛЯРНЫЕ ПРОДУКТЫ Section:::... -->
+    <div class="product-tab-section section-top-gap-100">
+        <!-- Start Section Content -->
+        <div class="section-content-gap">
+            <div class="container">
+                <div class="row">
+                    <div class="section-content d-flex justify-content-between align-items-md-center align-items-start flex-md-row flex-column">
+                        <h3 class="section-title">Популярные продукты</h3>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- End Section Content -->
+
+        <!-- Start Tab Wrapper -->
+        <div class="product-tab-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="tab-content tab-animate-zoom">
+                            <div class="tab-pane show active" id="car_and_drive">
+                                <div id="popular_products"
+                                     class="product-default-slider product-default-slider-4grids-1row">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- End Catagory Wrapper -->
+
+    </div> <!-- ...:::: Start ПОУЛЯРНЫЕ ПРОДУКТЫ Section:::... -->
+
+    <!-- ...:::: Start Company Logo Section:::... -->
+{#    <div class="company-logo-section section-top-gap-100">#}
+{#        <!-- Start Company Logo Wrapper -->#}
+{#        <div class="company-logo-wrapper">#}
+{#            <div class="container">#}
+{#                <div class="row">#}
+{#                    <div class="col-12">#}
+{#                        <div class="company-logo-slider">#}
+{#                            <!-- Start Company logo Single -->#}
+{#                            <div class="company-logo-single">#}
+{#                                <img src="../../static/images/company_logo/company_logo_1.png" alt=""#}
+{#                                     class="img-fluid company-logo-image">#}
+{#                            </div> <!-- End Company logo Single -->#}
+{#                            <!-- Start Company logo Single -->#}
+{#                            <div class="company-logo-single">#}
+{#                                <img src="../../static/images/company_logo/company_logo_2.png" alt=""#}
+{#                                     class="img-fluid company-logo-image">#}
+{#                            </div> <!-- End Company logo Single -->#}
+{#                            <!-- Start Company logo Single -->#}
+{#                            <div class="company-logo-single">#}
+{#                                <img src="../../static/images/company_logo/company_logo_3.png" alt=""#}
+{#                                     class="img-fluid company-logo-image">#}
+{#                            </div> <!-- End Company logo Single -->#}
+{#                            <!-- Start Company logo Single -->#}
+{#                            <div class="company-logo-single">#}
+{#                                <img src="../../static/images/company_logo/company_logo_4.png" alt=""#}
+{#                                     class="img-fluid company-logo-image">#}
+{#                            </div> <!-- End Company logo Single -->#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div> <!-- End Company Logo Wrapper -->#}
+{#    </div> <!-- ...:::: End Company Logo Section:::... -->#}
+
+    <!-- ...:::: Start Blog Feed Section:::... -->
+    <div class="blog-feed-section section-top-gap-100">
+        <!-- Start Section Content -->
+        <div class="section-content-gap">
+            <div class="container">
+                <div class="row">
+                    <div class="section-content">
+                        <h3 class="section-title">Latest News</h3>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- End Section Content -->
+
+        <!-- Start Blog Feed Wrapper -->
+        <div class="blog-feed-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <!-- Start Blog Feed Single -->
+                        <div class="blog-feed-single">
+                            <a href="blog-single-sidebar-left.html" class="blog-feed-img-link">
+                                <img src="../../static/images/blog_images/aments_blog_01.jpg" alt=""
+                                     class="blog-feed-img">
+                            </a>
+                            <div class="blog-feed-content">
+                                <div class="blog-feed-post-meta">
+                                    <span>By:</span>
+                                    <a href="" class="blog-feed-post-meta-author">Admin</a> -
+                                    <a href="" class="blog-feed-post-meta-date">Sep 14, 2020</a>
+                                </div>
+                                <h5 class="blog-feed-link"><a href="blog-single-sidebar-left.html">Lorem ipsum dolor
+                                    amet
+                                    cons adipisicing elit</a></h5>
+                            </div>
+                        </div><!-- End Blog Feed Single -->
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <!-- Start Blog Feed Single -->
+                        <div class="blog-feed-single">
+                            <a href="blog-single-sidebar-left.html" class="blog-feed-img-link">
+                                <img src="../../static/images/blog_images/aments_blog_02.jpg" alt=""
+                                     class="blog-feed-img">
+                            </a>
+                            <div class="blog-feed-content">
+                                <div class="blog-feed-post-meta">
+                                    <span>By:</span>
+                                    <a href="" class="blog-feed-post-meta-author">Admin</a> -
+                                    <a href="" class="blog-feed-post-meta-date">Sep 14, 2020</a>
+                                </div>
+                                <h5 class="blog-feed-link"><a href="blog-single-sidebar-left.html">Lorem ipsum dolor
+                                    amet
+                                    cons adipisicing elit</a></h5>
+                            </div>
+                        </div><!-- End Blog Feed Single -->
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <!-- Start Blog Feed Single -->
+                        <div class="blog-feed-single">
+                            <a href="blog-single-sidebar-left.html" class="blog-feed-img-link">
+                                <img src="../../static/images/blog_images/aments_blog_03.jpg" alt=""
+                                     class="blog-feed-img">
+                            </a>
+                            <div class="blog-feed-content">
+                                <div class="blog-feed-post-meta">
+                                    <span>By:</span>
+                                    <a href="" class="blog-feed-post-meta-author">Admin</a> -
+                                    <a href="" class="blog-feed-post-meta-date">Sep 14, 2020</a>
+                                </div>
+                                <h5 class="blog-feed-link"><a href="blog-single-sidebar-left.html">Lorem ipsum dolor
+                                    amet
+                                    cons adipisicing elit</a></h5>
+                            </div>
+                        </div><!-- End Blog Feed Single -->
+                    </div>
+                </div>
+            </div>
+        </div> <!-- End Blog Feed Wrapper -->
+    </div> <!-- ...:::: End Blog Feed Section:::... -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{% static 'js/homepage.js' %}"></script>
+{% endblock content %}

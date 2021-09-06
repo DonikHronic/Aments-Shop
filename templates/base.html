@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aments - Car Accessories Shop HTML Template</title>
+
+    <!-- ::::::::::::::Favicon icon::::::::::::::-->
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/png">
+
+    <!-- ::::::::::::::All CSS Files here :::::::::::::: -->
+    <link rel="stylesheet" href="{% static 'css/vendor.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/plugins.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.min.css' %}">
+</head>
+
+<body>
+{% include 'include/header.html' %}
+{% block content %}
+{% endblock content%}
+{% include 'include/footer.html' %}
+{% include 'include/cart_modal.html' %}
+<!-- ::::::::::::::All JS Files here :::::::::::::: -->
+
+<script src="{% static 'js/vendor.min.js' %}"></script>
+<script src="{% static 'js/plugins.min.js' %}"></script>
+
+<!-- Main JS -->
+<script src="{% static 'js/main.min.js' %}"></script>
+
+</body>
+
+</html>
