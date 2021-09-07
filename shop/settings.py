@@ -139,3 +139,7 @@ REST_FRAMEWORK = {
 	'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
 	'PAGE_SIZE': 12
 }
+
+LOGIN_REDIRECT_URL = '/accounts/'
+LOGIN_URL = '/accounts/login/'
+LOGOUT_REDIRECT_URL = '/'

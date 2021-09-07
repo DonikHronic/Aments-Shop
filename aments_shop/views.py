@@ -1,15 +1,17 @@
 from datetime import datetime, timedelta
 import json
 
+from django.contrib.auth.decorators import login_required
 from django.db.models import Count
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from rest_framework import generics
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from .models import Product, ProductAnalytics, Category
+from shop import settings
+from .models import Product, ProductAnalytics, Category, CustomUser
 from .serializers import ProductSerializer, CategorySerializer
 
 
@@ -100,6 +102,24 @@ class ProductView(ListView):
 class ProductDetailView(DetailView):
 	model = Product
 	slug_field = 'url'
+
+
+def registration(request):
+	context = {}
+	if request.method == 'POST':
+		username = request.POST.get('username', None)
+		password = request.POST.get('password', None)
+		email = request.POST.get('email', None)
+		user = CustomUser.objects.create(username=username, email=email)
+		user.set_password(password)
+		user.save()
+	return redirect(settings.LOGIN_URL)
+
+
+@login_required
+def account(request):
+	context = {}
+	return render(request, 'registration/my-account.html', context)
 
 
 def homepage(request):

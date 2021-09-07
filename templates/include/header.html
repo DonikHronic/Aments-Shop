@@ -19,7 +19,13 @@
                                 <!-- Header Top Menu's Dropdown -->
                                 <ul class="user-sub-menu">
                                     <li><a href="">Checkout</a></li>
-                                    <li><a href="">My Account</a></li>
+                                    {% if request.user.is_authenticated %}
+                                        <li>
+                                            <a href="{% url 'profile' %}">My Account: ({{ request.user }})</a>
+                                        </li>
+                                    {% else %}
+                                        <li><a href="{% url 'login' %}">Log in</a></li>
+                                    {% endif %}
                                     <li><a href="">Shopping Cart</a></li>
                                     <li><a href="">Wishlist</a></li>
                                 </ul>
@@ -194,7 +200,13 @@
                     <!-- Header Top Menu's Dropdown -->
                     <ul class="mobile-user-sub-menu">
                         <li><a href="">Checkout</a></li>
-                        <li><a href="">My Account</a></li>
+                        {% if request.user.is_authenticated %}
+                            <li>
+                                <a href="{% url 'profile' %}">My Account: ({{ request.user }})</a>
+                            </li>
+                        {% else %}
+                            <li><a href="{% url 'login' %}">Log in</a></li>
+                        {% endif %}
                         <li><a href="">Shopping Cart</a></li>
                         <li><a href="">Wishlist</a></li>
                     </ul>
