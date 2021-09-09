@@ -8,11 +8,17 @@ from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from rest_framework import generics
 from rest_framework.decorators import api_view
+from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 
 from shop import settings
+from .favorites import ShoppingCart
 from .models import Product, ProductAnalytics, Category, CustomUser
 from .serializers import ProductSerializer, CategorySerializer
+
+
+def homepage(request):
+	return render(request, 'aments_shop/index.html')
 
 
 class CommandFilter:
@@ -122,5 +128,24 @@ def account(request):
 	return render(request, 'registration/my-account.html', context)
 
 
-def homepage(request):
-	return render(request, 'aments_shop/index.html')
+@api_view(['GET'])
+def add_to_cart(request, product_id):
+	cart = ShoppingCart(request)
+	product = get_object_or_404(Product, id=product_id)
+	print(product)
+	cart.add_or_update(product)
+	return redirect('cart_detail')
+
+
+@api_view(['GET'])
+def remove_from_cart(request, product_id):
+	cart = ShoppingCart(request)
+	product = get_object_or_404(Product, id=product_id)
+	cart.remove(product)
+	return redirect('cart_detail')
+
+
+@api_view(['GET'])
+def shopping_cart(request):
+	cart = ShoppingCart(request)
+	return render(request, 'aments_shop/cart.html', {'shopping_cart': cart})

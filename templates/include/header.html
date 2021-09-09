@@ -15,7 +15,7 @@
                         <!-- Start Header Top Menu -->
                         <ul class="header-user-menu">
                             <li class="has-user-dropdown">
-                                <a href="">Setting</a>
+                                <a>Setting</a>
                                 <!-- Header Top Menu's Dropdown -->
                                 <ul class="user-sub-menu">
                                     <li><a href="">Checkout</a></li>
@@ -23,20 +23,12 @@
                                         <li>
                                             <a href="{% url 'profile' %}">My Account: ({{ request.user }})</a>
                                         </li>
+                                        <li><a href="{% url 'cart_detail' %}">Shopping Cart</a></li>
                                     {% else %}
                                         <li><a href="{% url 'login' %}">Log in</a></li>
+                                        <li><a href="{% url 'login' %}">Shopping Cart</a></li>
                                     {% endif %}
-                                    <li><a href="">Shopping Cart</a></li>
                                     <li><a href="">Wishlist</a></li>
-                                </ul>
-                            </li>
-                            <li class="has-user-dropdown">
-                                <a href="">$ USD</a>
-                                <!-- Header Top Menu's Dropdown -->
-                                <ul class="user-sub-menu">
-                                    <li><a href="">EUR – Euro</a></li>
-                                    <li><a href="">GBP – British Pound</a></li>
-                                    <li><a href="">INR – India Rupee</a></li>
                                 </ul>
                             </li>
                             <li class="has-user-dropdown">
@@ -204,20 +196,12 @@
                             <li>
                                 <a href="{% url 'profile' %}">My Account: ({{ request.user }})</a>
                             </li>
+                            <li><a href="{% url 'cart_detail' %}">Shopping Cart</a></li>
                         {% else %}
                             <li><a href="{% url 'login' %}">Log in</a></li>
+                            <li><a href="{% url 'login' %}">Shopping Cart</a></li>
                         {% endif %}
-                        <li><a href="">Shopping Cart</a></li>
                         <li><a href="">Wishlist</a></li>
-                    </ul>
-                </li>
-                <li class=" has-mobile-user-dropdown">
-                    <a class="mobile-user-menu-link" href="">$ USD</a>
-                    <!-- Header Top Menu's Dropdown -->
-                    <ul class="mobile-user-sub-menu">
-                        <li><a href="">EUR – Euro</a></li>
-                        <li><a href="">GBP – British Pound</a></li>
-                        <li><a href="">INR – India Rupee</a></li>
                     </ul>
                 </li>
                 <li class="has-mobile-user-dropdown">
@@ -269,9 +253,14 @@
                     </a>
                 </li>
                 <li class="mobile-action-icon-item">
-                    <a href="cart.html" class="mobile-action-icon-link">
-                        <i class="icon-shopping-cart"></i>
-                        <span class="mobile-action-icon-item-count">3</span>
+                    {% if request.user.is_authenticated %}
+                        <a href="{% url 'cart_detail' %}" class="mobile-action-icon-link">
+                    {% else %}
+                        <a href="{% url 'login' %}" class="mobile-action-icon-link">
+                    {% endif %}
+
+                    <i class="icon-shopping-cart"></i>
+                    <span class="mobile-action-icon-item-count">3</span>
                     </a>
                 </li>
             </ul> <!-- End Header Action Icon -->
@@ -383,9 +372,15 @@
             <span class="offcanvas-cart-total-price-value">$170.00</span>
         </div>
         <ul class="offcanvas-cart-action-button">
-            <li class="offcanvas-cart-action-button-list">
-                <a href="" class="offcanvas-cart-action-button-link">View Cart</a>
-            </li>
+            {% if request.user.is_authenticated %}
+                <li class="offcanvas-cart-action-button-list">
+                    <a href="{% url 'cart_detail' %}" class="offcanvas-cart-action-button-link">View Cart</a>
+                </li>
+            {% else %}
+                <li class="offcanvas-cart-action-button-list">
+                    <a href="{% url 'login' %}" class="offcanvas-cart-action-button-link">View Cart</a>
+                </li>
+            {% endif %}
             <li class="offcanvas-cart-action-button-list">
                 <a href="" class="offcanvas-cart-action-button-link">Checkout</a>
             </li>

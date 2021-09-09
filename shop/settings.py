@@ -143,3 +143,6 @@ REST_FRAMEWORK = {
 LOGIN_REDIRECT_URL = '/accounts/'
 LOGIN_URL = '/accounts/login/'
 LOGOUT_REDIRECT_URL = '/'
+
+SHOPPING_CART_SESSION_ID = 'shopping_cart'
+WISHLIST_SESSION_ID = 'wishlist'
