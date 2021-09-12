@@ -191,17 +191,19 @@
                     <a class="mobile-user-menu-link" href="">Setting</a>
                     <!-- Header Top Menu's Dropdown -->
                     <ul class="mobile-user-sub-menu">
-                        <li><a href="">Checkout</a></li>
                         {% if request.user.is_authenticated %}
+                            <li><a href="">Checkout</a></li>
                             <li>
                                 <a href="{% url 'profile' %}">My Account: ({{ request.user }})</a>
                             </li>
                             <li><a href="{% url 'cart_detail' %}">Shopping Cart</a></li>
+                            <li><a href="">Wishlist</a></li>
                         {% else %}
+                            <li><a href="">Checkout</a></li>
                             <li><a href="{% url 'login' %}">Log in</a></li>
                             <li><a href="{% url 'login' %}">Shopping Cart</a></li>
+                            <li><a href="">Wishlist</a></li>
                         {% endif %}
-                        <li><a href="">Wishlist</a></li>
                     </ul>
                 </li>
                 <li class="has-mobile-user-dropdown">

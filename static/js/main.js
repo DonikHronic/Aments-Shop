@@ -88,27 +88,59 @@
             commands_list.push(...commands)
             getProducts("new_deliveries", "new_products");
             getProducts("popular_product", "popular_products");
-        });
-        $.get('/get_popular_categories/').done(function (data) {
-            let in_block = $('#categories');
-            let html = '';
-            for (let dataKey in data) {
-                html += `
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-12">
-                        <!-- Start Product Catagory Single -->
-                        <a href="` + data[dataKey]['url'] + `" class="product-catagory-single">
-                            <div class="product-catagory-img">
-                                <img src="` + data[dataKey]['category_image'] + `" alt="">
-                            </div>
-                            <div class="product-catagory-content">
-                                <h5 class="product-catagory-title">` + data[dataKey]['name'] + `</h5>
-                                <span class="product-catagory-items">(` + data[dataKey]['category_count'] + ` items)</span>
-                            </div>
-                        </a> <!-- End Product Catagory Single -->
-                    </div>
-                `
-            }
-            in_block.append(html)
+            $.get('/get_popular_categories/').done(function (data) {
+                let in_block = $('#categories');
+                let html = '';
+                for (let dataKey in data) {
+                    html += `
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                            <!-- Start Product Catagory Single -->
+                            <a href="` + data[dataKey]['url'] + `" class="product-catagory-single">
+                                <div class="product-catagory-img">
+                                    <img src="` + data[dataKey]['category_image'] + `" alt="">
+                                </div>
+                                <div class="product-catagory-content">
+                                    <h5 class="product-catagory-title">` + data[dataKey]['name'] + `</h5>
+                                    <span class="product-catagory-items">(` + data[dataKey]['category_count'] + ` items)</span>
+                                </div>
+                            </a> <!-- End Product Catagory Single -->
+                        </div>
+                    `
+                }
+                $('.product-default-slider-4grids-1row').slick({
+                    arrows: true,
+                    infinite: false,
+                    slidesToShow: 4,
+                    slidesToScroll: 1,
+                    rows: 1,
+                    easing: 'ease-out',
+                    speed: 1000,
+                    prevArrow: '<button type="button" class="default-slider-arrow default-slider-arrow--left prevArrow"><i class="fa fa-angle-left"></button>',
+                    nextArrow: '<button type="button"  class="default-slider-arrow default-slider-arrow--right nextArrow"><i class="fa fa-angle-right"></button>',
+                    responsive: [
+
+                        {
+                            breakpoint: 1200,
+                            settings: {
+                                slidesToShow: 3
+                            }
+                        },
+                        {
+                            breakpoint: 992,
+                            settings: {
+                                slidesToShow: 2,
+                            }
+                        },
+                        {
+                            breakpoint: 575,
+                            settings: {
+                                slidesToShow: 1,
+                            }
+                        },
+                    ]
+                });
+                in_block.append(html);
+            });
         });
     });
 
@@ -180,7 +212,9 @@
         $('.add_to_cart').click(function () {
             let id_par = $(this).parents('.product-img-warp');
             let id = id_par.attr('data-id');
-            alert('ok');
+            if (!id) {
+                id = $(this).attr('data-id');
+            }
             let url = '/accounts/cart/add/' + String(id);
             $.get(url).done(function (data) {
                 console.log('success');
@@ -210,40 +244,6 @@
     /************************************************
      * Product Slider - Style: Default [4 Grid, 1 Row]
      ***********************************************/
-    setTimeout(function () {
-        $('.product-default-slider-4grids-1row').slick({
-            arrows: true,
-            infinite: false,
-            slidesToShow: 4,
-            slidesToScroll: 1,
-            rows: 1,
-            easing: 'ease-out',
-            speed: 1000,
-            prevArrow: '<button type="button" class="default-slider-arrow default-slider-arrow--left prevArrow"><i class="fa fa-angle-left"></button>',
-            nextArrow: '<button type="button"  class="default-slider-arrow default-slider-arrow--right nextArrow"><i class="fa fa-angle-right"></button>',
-            responsive: [
-
-                {
-                    breakpoint: 1200,
-                    settings: {
-                        slidesToShow: 3
-                    }
-                },
-                {
-                    breakpoint: 992,
-                    settings: {
-                        slidesToShow: 2,
-                    }
-                },
-                {
-                    breakpoint: 575,
-                    settings: {
-                        slidesToShow: 1,
-                    }
-                },
-            ]
-        });
-    }, 1000)
 
     /************************************************
      * Company logo Slider
@@ -444,7 +444,6 @@
      * Scroll Top
      ***********************************************/
     $body.materialScrollTop();
-
 
 })(jQuery);
 

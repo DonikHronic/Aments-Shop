@@ -11,8 +11,8 @@
                         <div class="breadcrumb-nav">
                             <nav aria-label="breadcrumb">
                                 <ul>
-                                    <li><a href="index.html">Home</a></li>
-                                    <li><a href="product_list.html">Shop</a></li>
+                                    <li><a href="{% url 'home' %}">Home</a></li>
+                                    <li><a href="{% url 'profile' %}">Shop</a></li>
                                     <li class="active" aria-current="page">Cart</li>
                                 </ul>
                             </nav>
@@ -66,8 +66,9 @@
                                                 {% endif %}
                                             </td>
                                             <td class="product_quantity">
-                                                <label>Кол-во</label>
-                                                <input min="1" max="100" value="1" type="number">
+                                                <label>
+                                                    Кол-во&emsp;<input min="1" max="100" value="1" type="number">
+                                                </label>
                                             </td>
                                             <td class="product_total">$130.00</td>
                                         </tr> <!-- End Cart Single Item-->

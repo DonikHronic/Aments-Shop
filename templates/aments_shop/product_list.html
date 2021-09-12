@@ -84,7 +84,7 @@
                                                     <div class="col-xl-4 col-sm-6 col-12">
                                                         <!-- Start Product Defautlt Single -->
                                                         <div class="product-default-single border-around">
-                                                            <div class="product-img-warp">
+                                                            <div class="product-img-warp" data-id="{{ product.id }}">
                                                                 <a href="{{ product.get_absolute_url }}"
                                                                    class="product-default-img-link">
                                                                     <img src="{{ product.preview.url }}"
@@ -108,7 +108,7 @@
                                                                                 <i class="icon-eye"></i>
                                                                             </a>
                                                                         </li>
-                                                                        <li>
+                                                                        <li class="add_to_cart">
                                                                             <a href="#" data-toggle="modal"
                                                                                data-target="#modalAddcart">
                                                                                 <i class="icon-shopping-cart"></i>
