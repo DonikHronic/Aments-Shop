@@ -14,12 +14,14 @@
     <link rel="stylesheet" href="{% static 'css/vendor.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/plugins.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.min.css' %}">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
 <body>
 {% include 'include/header.html' %}
 {% block content %}
-{% endblock content%}
+{% endblock content %}
 {% include 'include/footer.html' %}
 {% include 'include/cart_modal.html' %}
 <!-- ::::::::::::::All JS Files here :::::::::::::: -->

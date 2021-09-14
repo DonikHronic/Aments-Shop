@@ -94,10 +94,10 @@ class ProductAnalyticsAdmin(admin.ModelAdmin):
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
 	"""Пост"""
-	list_display = ('id', 'title', 'author', 'publish_date', 'preview')
+	list_display = ('id', 'title', 'author', 'publish_date', 'get_preview')
 	list_display_links = ('id', 'title')
 	list_filter = ('author', 'tags')
-	readonly_fields = ('author', 'get_preview')
+	readonly_fields = ('author', 'get_preview',)
 	inlines = [PostReviewInline]
 	save_on_top = True
 	save_as = True

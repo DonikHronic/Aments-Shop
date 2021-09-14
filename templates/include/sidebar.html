@@ -1,148 +1,250 @@
-<!-- Start Sidebar Area -->
-<div class="siderbar-section">
+<form action="." method="GET">
+    {% csrf_token %}
 
-    <!-- Start Single Sidebar Widget -->
-    <div class="sidebar-single-widget">
-        <h6 class="sidebar-title">FILTER BY PRICE</h6>
-        <div class="sidebar-content">
-            <div id="slider-range"></div>
-            <div class="filter-type-price">
-                <label for="amount">Price range:</label>
-                <input type="text" id="amount">
+    <!-- Start Sidebar Area -->
+    <div class="siderbar-section">
+
+        <!-- Start Single Sidebar Widget -->
+        <div class="sidebar-single-widget" style="position: relative; height: 250px">
+            <h6 class="sidebar-title">FILTER BY PRICE</h6>
+
+            <div class="progress-filter">
+                <div class="precent">10000$</div>
+                <div class="circle"></div>
+                <div class="range mt-3">
+                    <input name="price" type="range" min="0" max="1000" value="1000" id="range">
+                    <div class="filled"></div>
+                </div>
             </div>
-        </div>
-    </div> <!-- End Single Sidebar Widget -->
 
-    <!-- Start Single Sidebar Widget -->
-    <div class="sidebar-single-widget">
-        <h6 class="sidebar-title">CATEGORIES</h6>
-        <div class="sidebar-content">
-            <div class="filter-type-select">
-                <ul>
-                    <li>
-                        <label class="checkbox-default" for="catagory_1">
-                            <input type="checkbox" id="catagory_1">
-                            <span>Catagory (1)</span>
-                        </label>
-                    </li>
-                    <li>
-                        <label class="checkbox-default" for="catagory_2">
-                            <input type="checkbox" id="catagory_2">
-                            <span>Catagory (2)</span>
-                        </label>
-                    </li>
-                    <li>
-                        <label class="checkbox-default" for="catagory_3">
-                            <input type="checkbox" id="catagory_3">
-                            <span>Catagory (3)</span>
-                        </label>
-                    </li>
-                    <li>
-                        <label class="checkbox-default" for="catagory_4">
-                            <input type="checkbox" id="catagory_4">
-                            <span>Catagory (4)</span>
-                        </label>
-                    </li>
-                    <li>
-                        <label class="checkbox-default" for="catagory_5">
-                            <input type="checkbox" id="catagory_5">
-                            <span>Catagory (5)</span>
-                        </label>
-                    </li>
-                </ul>
+
+        </div> <!-- End Single Sidebar Widget -->
+
+
+        <style>
+            .progress-filter {
+                width: 200px;
+                height: 200px;
+                position: absolute;
+                top: 60%;
+                left: 40%;
+                transform: translate(-50%, -50%);
+            }
+
+            .progress-filter:before {
+                content: "";
+                position: absolute;
+                width: 180px;
+                height: 180px;
+                background: #fff;
+                border-radius: 100%;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 99;
+            }
+
+            .progress-filter .precent {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                z-index: 99;
+                transform: translate(-50%, -50%);
+                font-size: 35px;
+                color: #333333;
+            }
+
+            .progress-filter .circle {
+                width: 200px;
+                height: 200px;
+                background-image: linear-gradient(135deg, #5efce8 10%, #736efe 100%);
+                -webkit-clip-path: polygon(
+                        0% 100%,
+                        0% 0%,
+                        100% 0%,
+                        50% 50%,
+                        100% 0%,
+                        100% 100%
+                );
+                clip-path: polygon(0% 100%, 0% 0%, 100% 0%, 50% 50%, 100% 0%, 100% 100%);
+                animation-name: loading;
+                animation-duration: 5s;
+                animation-iteration-count: infinite;
+                animation-timing-function: cubic-bezier(0, 0.1, 0.9, 0.81);
+                animation-play-state: paused;
+                animation-direction: reverse;
+                animation-delay: 5s;
+                border-radius: 100%;
+            }
+
+            @keyframes loading {
+                0% {
+                    -webkit-clip-path: polygon(
+                            0% 100%,
+                            0% 0%,
+                            100% 0%,
+                            50% 50%,
+                            100% 0%,
+                            100% 100%
+                    );
+                    clip-path: polygon(0% 100%, 0% 0%, 100% 0%, 50% 50%, 100% 0%, 100% 100%);
+                }
+                25% {
+                    -webkit-clip-path: polygon(
+                            0% 100%,
+                            0% 0%,
+                            100% 0%,
+                            50% 50%,
+                            100% 100%,
+                            100% 100%
+                    );
+                    clip-path: polygon(0% 100%, 0% 0%, 100% 0%, 50% 50%, 100% 100%, 100% 100%);
+                }
+                50% {
+                    -webkit-clip-path: polygon(
+                            0% 100%,
+                            0% 0%,
+                            100% 0%,
+                            50% 50%,
+                            0% 100%,
+                            0% 100%
+                    );
+                    clip-path: polygon(0% 100%, 0% 0%, 100% 0%, 50% 50%, 0% 100%, 0% 100%);
+                }
+                75% {
+                    -webkit-clip-path: polygon(0% 100%, 0% 0%, 100% 0%, 50% 50%, 0% 0%, 0% 0%);
+                    clip-path: polygon(0% 100%, 0% 0%, 100% 0%, 50% 50%, 0% 0%, 0% 0%);
+                }
+                100% {
+                    -webkit-clip-path: polygon(
+                            0% 100%,
+                            0% 0%,
+                            100% 0%,
+                            50% 50%,
+                            100% 0%,
+                            0% 0%
+                    );
+                    clip-path: polygon(0% 100%, 0% 0%, 100% 0%, 50% 50%, 100% 0%, 0% 0%);
+                }
+            }
+
+            .progress .range {
+                margin-top: 20px;
+            }
+
+            .progress input[type="range"] {
+                -webkit-appearance: none;
+                width: 100%;
+                background: transparent;
+            }
+
+            .progress input[type="range"]::-webkit-slider-thumb {
+                -webkit-appearance: none;
+            }
+
+            .progress input[type="range"]:focus {
+                outline: none;
+            }
+
+            .progress input[type="range"]::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                height: 16px;
+                width: 16px;
+                border-radius: 100%;
+                background: #2a438a;
+                cursor: pointer;
+                margin-top: -6px;
+                z-index: 9;
+                position: relative;
+            }
+
+            .progress input[type="range"]::-moz-range-thumb {
+                height: 16px;
+                width: 16px;
+                border-radius: 100%;
+                background: #2a438a;
+                cursor: pointer;
+                border: 0;
+                z-index: 9;
+                position: relative;
+            }
+
+            .progress input[type="range"]::-webkit-slider-runnable-track {
+                width: 100%;
+                height: 5px;
+                cursor: pointer;
+                background: #214c8b;
+                border-radius: 20px;
+            }
+
+            .progress input[type="range"]::-moz-range-track {
+                width: 100%;
+                height: 5px;
+                cursor: pointer;
+                background: #214c8b;
+                border-radius: 20px;
+            }
+        </style>
+
+        <script type="text/javascript">
+            $(function () {
+                let range = $("#range")[0];
+                $(".progress-filter .circle").attr("style", "animation-delay:5s");
+                $(".progress-filter .precent").text(range.value + "$");
+                $(document).on("input", "#range", function () {
+                    let percent = ((this.value - this.min) / (this.max - this.min)) * 5;
+                    if (percent < 5) {
+                        $(".progress-filter .circle").attr("style", "animation-delay:-" + percent + "s");
+                    } else {
+                        $(".progress-filter .circle").attr("style", "animation-delay:5s");
+                    }
+                    $(".progress-filter .precent").text(this.value + "$");
+                });
+            });
+        </script>
+
+        <!-- Start Single Sidebar Widget -->
+        <div class="sidebar-single-widget">
+            <h6 class="sidebar-title">Категории</h6>
+            <div class="sidebar-content">
+                <div class="filter-type-select">
+                    <ul>
+                        {% for category in categories %}
+                            <li>
+                                <label class="checkbox-default" for="category_{{ category.id }}">
+                                    <input name="category[]" value="{{ category.id }}" type="checkbox"
+                                           id="category_{{ category.id }}">
+                                    <span>{{ category.name }}</span>
+                                </label>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
             </div>
-        </div>
-    </div> <!-- End Single Sidebar Widget -->
-    <!-- Start Single Sidebar Widget -->
-    <div class="sidebar-single-widget">
-        <h6 class="sidebar-title">MANUFACTURER</h6>
-        <div class="sidebar-content">
-            <div class="filter-type-select">
-                <ul>
-                    <li>
-                        <label class="checkbox-default" for="brakeParts">
-                            <input type="checkbox" id="brakeParts">
-                            <span>Brake Parts(6)</span>
-                        </label>
-                    </li>
-                    <li>
-                        <label class="checkbox-default" for="accessories">
-                            <input type="checkbox" id="accessories">
-                            <span>Accessories (10)</span>
-                        </label>
-                    </li>
-                    <li>
-                        <label class="checkbox-default" for="EngineParts">
-                            <input type="checkbox" id="EngineParts">
-                            <span>Engine Parts (4)</span>
-                        </label>
-                    </li>
-                    <li>
-                        <label class="checkbox-default" for="hermes">
-                            <input type="checkbox" id="hermes">
-                            <span>hermes (10)</span>
-                        </label>
-                    </li>
-                    <li>
-                        <label class="checkbox-default" for="tommyHilfiger">
-                            <input type="checkbox" id="tommyHilfiger">
-                            <span>Tommy Hilfiger(7)</span>
-                        </label>
-                    </li>
-                </ul>
+        </div> <!-- End Single Sidebar Widget -->
+        <!-- Start Single Sidebar Widget -->
+        <div class="sidebar-single-widget">
+            <h6 class="sidebar-title">SELECT BY COLOR</h6>
+            <div class="sidebar-content">
+                <div class="filter-type-select">
+                    <ul>
+                        {% for color in colors %}
+                            <li>
+                                <label class="checkbox-default" for="{{ color.0 }}">
+                                    <input name="color[]" value="{{ color.0 }}" type="checkbox" id="{{ color.0 }}">
+                                    <span>{{ color.1 }}</span>
+                                </label>
+                            </li>
+                        {% endfor %}
+
+                    </ul>
+                </div>
             </div>
-        </div>
-    </div> <!-- End Single Sidebar Widget -->
+        </div> <!-- End Single Sidebar Widget -->
 
-    <!-- Start Single Sidebar Widget -->
-    <div class="sidebar-single-widget">
-        <h6 class="sidebar-title">SELECT BY COLOR</h6>
-        <div class="sidebar-content">
-            <div class="filter-type-select">
-                <ul>
-                    <li>
-                        <label class="checkbox-default" for="black">
-                            <input type="checkbox" id="black">
-                            <span>Black (6)</span>
-                        </label>
-                    </li>
-                    <li>
-                        <label class="checkbox-default" for="blue">
-                            <input type="checkbox" id="blue">
-                            <span>Blue (8)</span>
-                        </label>
-                    </li>
-                    <li>
-                        <label class="checkbox-default" for="brown">
-                            <input type="checkbox" id="brown">
-                            <span>Brown (10)</span>
-                        </label>
-                    </li>
-                    <li>
-                        <label class="checkbox-default" for="Green">
-                            <input type="checkbox" id="Green">
-                            <span>Green (6)</span>
-                        </label>
-                    </li>
-                    <li>
-                        <label class="checkbox-default" for="pink">
-                            <input type="checkbox" id="pink">
-                            <span>Pink (4)</span>
-                        </label>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div> <!-- End Single Sidebar Widget -->
 
-    <!-- Start Single Sidebar Widget -->
-    <div class="sidebar-single-widget">
-        <div class="sidebar-content">
-            <a href="product_detail.html" class="sidebar-banner">
-                <img class="img-fluid" src="../../static/images/banner_images/aments_banner_04.jpg"
-                     alt="">
-            </a>
-        </div>
-    </div> <!-- End Single Sidebar Widget -->
+    </div> <!-- End Sidebar Area -->
+    <button class="contact-submit-btn mt-3" type="submit">Применить</button>
 
-</div> <!-- End Sidebar Area -->
+
+</form>

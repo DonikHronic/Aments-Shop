@@ -7,15 +7,8 @@ urlpatterns = [
 	path('', include('aments_shop.api.urls')),
 	path('register/', views.registration, name='registration'),
 	path('accounts/', views.account, name='profile'),
-	# path('get_filter_list/', views.get_filter_list, name='get_filter_list'),
-	# path('get_products/', views.get_products, name='get_products'),
-	# path('get_popular_categories/', views.get_popular_categories, name='get_popular_categories'),
-	# path('products-api/', views.ProductApiView.as_view(), name='products-api'),
 	path('products/', views.ProductView.as_view(), name='products'),
-	path('<slug:slug>/', views.ProductDetailView.as_view(), name='product_detail'),
 	path('products/<slug:slug>/', views.ProductDetailView.as_view(), name='product_detail'),
-
-	# path('accounts/cart/', views.shopping_cart, name='cart_detail'),
-	# path('accounts/cart/add/<int:product_id>', views.add_to_cart, name='add_to_cart'),
-	# path('accounts/cart/remove/<int:product_id>', views.remove_from_cart, name='remove_from_cart'),
+	path('posts/', views.PostView.as_view(), name='posts'),
+	path('posts/<slug:slug>/', views.PostDetailView.as_view(), name='post_detail'),
 ]

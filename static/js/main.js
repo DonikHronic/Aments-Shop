@@ -88,6 +88,7 @@
             commands_list.push(...commands)
             getProducts("new_deliveries", "new_products");
             getProducts("popular_product", "popular_products");
+            showNewPosts("get_new_posts")
             $.get('/get_popular_categories/').done(function (data) {
                 let in_block = $('#categories');
                 let html = '';
@@ -207,6 +208,47 @@
         }
     }
 
+    function showNewPosts(command) {
+        let check = false;
+        for (let i in commands_list) {
+            if (command === commands_list[i])
+                check = true;
+        }
+
+        let html = ''
+        if (check) {
+            $.get('/get_new_posts/', {filter: command}).done(function (datas) {
+                for (let key in datas) {
+                    console.log(datas[key]);
+                    html += `
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <!-- Start Blog Feed Single -->
+                        <div class="blog-feed-single">
+                            <a href="` + datas[key]['url'] + `" class="blog-feed-img-link">
+                                <img src="` + datas[key]['preview'] + `" alt="" class="blog-feed-img">
+                            </a>
+                            <div class="blog-feed-content">
+                                <div class="blog-feed-post-meta">
+                                    <span>By:</span>
+                                    <a href="" class="blog-feed-post-meta-author">
+                                        ` + datas[key]['author']['username'] + `
+                                    </a> -
+                                    <a href="" class="blog-feed-post-meta-date">
+                                        ` + datas[key]['publish_date'].slice(0, 10) + `
+                                    </a>
+                                </div>
+                                <h5 class="blog-feed-link">
+                                    <a href="` + datas[key]['url'] + `">` + datas[key]['title'] + `</a>
+                                </h5>
+                            </div>
+                        </div><!-- End Blog Feed Single -->
+                    </div>
+                    `
+                }
+                $('#index_blog').append(html);
+            });
+        }
+    }
 
     setTimeout(function () {
         $('.add_to_cart').click(function () {

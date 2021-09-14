@@ -3,7 +3,8 @@ from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 
 from shop import settings
-from .models import Product, CustomUser
+from .filters import ProductsFilterClass
+from .models import Product, CustomUser, Post, Category
 
 
 def homepage(request):
@@ -11,9 +12,23 @@ def homepage(request):
 
 
 class ProductView(ListView):
-	model = Product
-	queryset = Product.objects.all()
+	# model = Product
+	# queryset = Product.objects.all()
 	paginate_by = 12
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+
+		context['categories'] = Category.objects.all()
+		context['colors'] = Product.get_colors()
+		return context
+
+	def get_queryset(self):
+		if self.request.method == 'GET':
+			filter = ProductsFilterClass(**self.request.GET)
+			# filter.parse_datas()
+			return Product.objects.all()
+		return Product.objects.all()
 
 
 class ProductDetailView(DetailView):
@@ -37,3 +52,14 @@ def registration(request):
 def account(request):
 	context = {}
 	return render(request, 'registration/my-account.html', context)
+
+
+class PostView(ListView):
+	model = Post
+	queryset = Post.objects.all()
+	paginate_by = 6
+
+
+class PostDetailView(DetailView):
+	model = Post
+	slug_field = 'url'

@@ -89,6 +89,10 @@ class Product(models.Model):
 			return self.price, (self.price * (100 - self.sales.value)) / 100
 		return self.price
 
+	@staticmethod
+	def get_colors():
+		return Product.Colors.choices
+
 	def to_json(self):
 		return model_to_dict(self)
 
@@ -298,13 +302,13 @@ class Post(models.Model):
 	preview = models.ImageField('Превью', upload_to='post_previews/')
 	publish_date = models.DateTimeField('Дата публикации', default=datetime.today)
 	tags = models.ManyToManyField('Tag', verbose_name='теги')
-	text = models.TextField('Текст', max_length=1000)
+	text = models.TextField('Текст', max_length=5000)
 	url = models.SlugField('Ссылка', max_length=250, unique=True)
 
 	def __str__(self):
 		return self.title
 
-	def get_absolute_usl(self):
+	def get_absolute_url(self):
 		return reverse('post_detail', kwargs={'slug': self.url})
 
 	class Meta:

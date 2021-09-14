@@ -9,47 +9,10 @@ from rest_framework.decorators import api_view
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 
-from .serializers import ProductSerializer, CategorySerializer
+from .serializers import ProductSerializer, CategorySerializer, PostsSerializer
 from aments_shop.favorites import ShoppingCart
-from aments_shop.models import Product, ProductAnalytics, Category
-
-
-class CommandFilter:
-	@staticmethod
-	def get_new_deliveries():
-		return Product.objects.filter(date__gte=datetime.today() - timedelta(days=7))
-
-	@staticmethod
-	def get_popular_product():
-		popular_products_list = [product.product.id for product in ProductAnalytics.objects.filter(views__gte=10)[:10]]
-		return Product.objects.filter(id__in=popular_products_list)
-
-	@staticmethod
-	def get_related_products():
-		pass
-
-	@staticmethod
-	def get_product_on_sale():
-		return Product.objects.filter(sale__isnull=False)
-
-
-class ProductFilter(CommandFilter):
-	FILTERS_LIST = {
-		'new_deliveries': CommandFilter.get_new_deliveries,
-		'popular_product': CommandFilter.get_popular_product,
-		'get_related_products': CommandFilter.get_related_products,
-		'product_on_sale': CommandFilter.get_product_on_sale,
-	}
-
-	def __init__(self, request):
-		self.request = request
-
-	@classmethod
-	def get_filters(cls):
-		return [key for key in cls.FILTERS_LIST.keys()]
-
-	def get_queryset(self):
-		return self.FILTERS_LIST[self.request]()
+from aments_shop.models import Product, Category
+from ..filters import ProductFilter
 
 
 @api_view(['GET'])
@@ -85,6 +48,19 @@ def get_filter_list(request) -> JsonResponse:
 	:return: JsonResponse
 	"""
 	return JsonResponse(json.dumps(ProductFilter.get_filters()), content_type='application/json', safe=False)
+
+
+@api_view(['GET'])
+def get_new_posts(request) -> Response:
+	"""
+	Вывод последних 3 постов
+	:param request:
+	:return:
+	"""
+
+	filtered_posts = ProductFilter(request.GET.get('filter', ''))
+	serializer = PostsSerializer(filtered_posts.get_queryset(), many=True)
+	return Response(serializer.data)
 
 
 class ProductApiView(generics.ListCreateAPIView):
