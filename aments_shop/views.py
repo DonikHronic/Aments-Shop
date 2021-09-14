@@ -12,8 +12,6 @@ def homepage(request):
 
 
 class ProductView(ListView):
-	# model = Product
-	# queryset = Product.objects.all()
 	paginate_by = 12
 
 	def get_context_data(self, **kwargs):
@@ -25,9 +23,8 @@ class ProductView(ListView):
 
 	def get_queryset(self):
 		if self.request.method == 'GET':
-			filter = ProductsFilterClass(**self.request.GET)
-			# filter.parse_datas()
-			return Product.objects.all()
+			filter_products = ProductsFilterClass(**self.request.GET)
+			return filter_products.parse_datas()
 		return Product.objects.all()
 
 

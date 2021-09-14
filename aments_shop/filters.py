@@ -10,7 +10,6 @@ class ProductsFilterClass:
 	def __init__(self, *args, **kwargs):
 		self.args = args
 		self.kwargs = kwargs
-		self.parse_datas()
 
 	def parse_datas(self):
 		objects = Product.objects
@@ -54,7 +53,7 @@ class CommandFilter:
 		return Product.objects.filter(sale__isnull=False)
 
 
-class ProductFilter(CommandFilter):
+class ProductApiFilter(CommandFilter):
 	FILTERS_LIST = {
 		'new_deliveries': CommandFilter.get_new_deliveries,
 		'popular_product': CommandFilter.get_popular_product,

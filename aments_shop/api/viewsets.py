@@ -12,7 +12,7 @@ from rest_framework.response import Response
 from .serializers import ProductSerializer, CategorySerializer, PostsSerializer
 from aments_shop.favorites import ShoppingCart
 from aments_shop.models import Product, Category
-from ..filters import ProductFilter
+from ..filters import ProductApiFilter
 
 
 @api_view(['GET'])
@@ -23,7 +23,7 @@ def get_products(request) -> Response:
 	:return: Response
 	"""
 
-	filtered_products = ProductFilter(request.GET.get('filter', ''))
+	filtered_products = ProductApiFilter(request.GET.get('filter', ''))
 	serializer = ProductSerializer(filtered_products.get_queryset(), many=True)
 	return Response(serializer.data)
 
@@ -47,7 +47,7 @@ def get_filter_list(request) -> JsonResponse:
 	:param request: Запрос
 	:return: JsonResponse
 	"""
-	return JsonResponse(json.dumps(ProductFilter.get_filters()), content_type='application/json', safe=False)
+	return JsonResponse(json.dumps(ProductApiFilter.get_filters()), content_type='application/json', safe=False)
 
 
 @api_view(['GET'])
@@ -58,7 +58,7 @@ def get_new_posts(request) -> Response:
 	:return:
 	"""
 
-	filtered_posts = ProductFilter(request.GET.get('filter', ''))
+	filtered_posts = ProductApiFilter(request.GET.get('filter', ''))
 	serializer = PostsSerializer(filtered_posts.get_queryset(), many=True)
 	return Response(serializer.data)
 
