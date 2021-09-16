@@ -1,5 +1,4 @@
 import json
-from datetime import datetime, timedelta
 
 from django.db.models import Count
 from django.http import JsonResponse
@@ -64,6 +63,7 @@ def get_new_posts(request) -> Response:
 
 
 class ProductApiView(generics.ListCreateAPIView):
+	"""Список продуктов"""
 	queryset = Product.objects.all()
 	serializer_class = ProductSerializer
 

@@ -62,6 +62,7 @@ class CategoryAdmin(admin.ModelAdmin):
 class ProductReviewAdmin(admin.ModelAdmin):
 	"""Отзыв к продукту"""
 	list_display = ('id', 'customer', 'product',)
+	list_display_links = ('customer', 'product',)
 	list_filter = ('customer', 'product',)
 	readonly_fields = ('customer',)
 	save_as = True

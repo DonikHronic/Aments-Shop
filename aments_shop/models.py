@@ -96,6 +96,9 @@ class Product(models.Model):
 	def to_json(self):
 		return model_to_dict(self)
 
+	def get_review(self):
+		return self.productreview_set.filter(parent__isnull=True)
+
 	class Meta:
 		db_table = 'product'
 		verbose_name = 'Продукт'
