@@ -314,6 +314,9 @@ class Post(models.Model):
 	def get_absolute_url(self):
 		return reverse('post_detail', kwargs={'slug': self.url})
 
+	def get_review(self):
+		return self.postreview_set.filter(parent__isnull=True)
+
 	class Meta:
 		db_table = 'post'
 		verbose_name = 'Пост'
@@ -340,9 +343,12 @@ class PostReview(models.Model):
 
 	user = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Пользователь')
 	name = models.CharField('Имя', max_length=50)
-	email = models.EmailField('Email', unique=True)
+	email = models.EmailField('Email')
 	text = models.TextField('Текст', max_length=500)
 	post = models.ForeignKey(Post, on_delete=models.CASCADE, verbose_name='Пост')
+	parent = models.ForeignKey(
+		'self', on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Родительский отзыв'
+	)
 
 	def __str__(self):
 		return f'{self.name} - {self.post}'

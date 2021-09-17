@@ -112,10 +112,12 @@ class PostAdmin(admin.ModelAdmin):
 @admin.register(PostReview)
 class PostReviewAdmin(admin.ModelAdmin):
 	"""Отзыв к посту"""
-	list_display = ('id', 'user', 'name', 'email', 'post')
+	list_display = ('id', 'name', 'email', 'post', 'parent')
+	list_display_links = ('name', 'email', 'post', 'parent')
 	list_filter = ('post', 'user')
 	readonly_fields = ('user', 'name', 'email')
 	save_as = True
+	save_on_top = True
 
 
 @admin.register(Rating)

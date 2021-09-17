@@ -136,124 +136,105 @@
                         </div>
                     </div> <!-- End Blog Single Content Area -->
                     <div class="comment-area">
-                        <h4 class="mb-30">3 Comments</h4>
+                        <h4 class="mb-30">{{ post.postreview_set.count }} Comments</h4>
                         <!-- Start - Review Comment -->
                         <ul class="comment">
                             <!-- Start - Review Comment list-->
-                            <li class="comment-list">
-                                <div class="comment-wrapper">
-                                    <div class="comment-img">
-                                        <img src="../../static/images/user/image-1.png" alt="">
-                                    </div>
-                                    <div class="comment-content">
-                                        <div class="comment-content-top">
-                                            <div class="comment-content-left">
-                                                <h6 class="comment-name">Kaedyn Fraser</h6>
-                                            </div>
-                                            <div class="comment-content-right">
-                                                <a href="#"><i class="fa fa-reply"></i>Reply</a>
-                                            </div>
+                            {% for review in post.get_review %}
+                                <li class="comment-list">
+                                    <div class="comment-wrapper">
+                                        <div class="comment-img">
+                                            <img src="{% static 'images/user/image-1.png' %}" alt="">
                                         </div>
-
-                                        <div class="para-content">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora
-                                                inventore dolorem a unde modi iste odio amet, fugit fuga aliquam,
-                                                voluptatem maiores animi dolor nulla magnam ea! Dignissimos aspernatur
-                                                cumque nam quod sint provident modi alias culpa, inventore deserunt
-                                                accusantium amet earum soluta consequatur quasi eum eius laboriosam,
-                                                maiores praesentium explicabo enim dolores quaerat! Voluptas ad ullam
-                                                quia odio sint sunt. Ipsam officia, saepe repellat. </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Start - Review Comment Reply-->
-                                <ul class="comment-reply">
-                                    <li class="comment-reply-list">
-                                        <div class="comment-wrapper">
-                                            <div class="comment-img">
-                                                <img src="../../static/images/user/image-2.png" alt="">
-                                            </div>
-                                            <div class="comment-content">
-                                                <div class="comment-content-top">
-                                                    <div class="comment-content-left">
-                                                        <h6 class="comment-name">Oaklee Odom</h6>
-                                                    </div>
-                                                    <div class="comment-content-right">
-                                                        <a href="#"><i class="fa fa-reply"></i>Reply</a>
-                                                    </div>
+                                        <div class="comment-content">
+                                            <div class="comment-content-top">
+                                                <div class="comment-content-left">
+                                                    <h6 class="comment-name">{{ review.name }}</h6>
                                                 </div>
-
-                                                <div class="para-content">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora
-                                                        inventore dolorem a unde modi iste odio amet, fugit fuga
-                                                        aliquam, voluptatem maiores animi dolor nulla magnam ea!
-                                                        Dignissimos aspernatur cumque nam quod sint provident modi alias
-                                                        culpa, inventore deserunt accusantium amet earum soluta
-                                                        consequatur quasi eum eius laboriosam, maiores praesentium
-                                                        explicabo enim dolores quaerat! Voluptas ad ullam quia odio sint
-                                                        sunt. Ipsam officia, saepe repellat. </p>
+                                                <div class="comment-content-right">
+                                                    <a href="#addComment"
+                                                       onclick="addPostReview('{{ review.name }}', '{{ review.id }}')">
+                                                        <i class="fa fa-reply"></i>Reply
+                                                    </a>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </li>
-                                </ul> <!-- End - Review Comment Reply-->
-                            </li> <!-- End - Review Comment list-->
-                            <!-- Start - Review Comment list-->
-                            <li class="comment-list">
-                                <div class="comment-wrapper">
-                                    <div class="comment-img">
-                                        <img src="../../static/images/user/image-3.png" alt="">
-                                    </div>
-                                    <div class="comment-content">
-                                        <div class="comment-content-top">
-                                            <div class="comment-content-left">
-                                                <h6 class="comment-name">Jaydin Jones</h6>
-                                            </div>
-                                            <div class="comment-content-right">
-                                                <a href="#"><i class="fa fa-reply"></i>Reply</a>
-                                            </div>
-                                        </div>
 
-                                        <div class="para-content">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora
-                                                inventore dolorem a unde modi iste odio amet, fugit fuga aliquam,
-                                                voluptatem maiores animi dolor nulla magnam ea! Dignissimos aspernatur
-                                                cumque nam quod sint provident modi alias culpa, inventore deserunt
-                                                accusantium amet earum soluta consequatur quasi eum eius laboriosam,
-                                                maiores praesentium explicabo enim dolores quaerat! Voluptas ad ullam
-                                                quia odio sint sunt. Ipsam officia, saepe repellat. </p>
+                                            <div class="para-content">
+                                                <p>{{ review.text }}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </li> <!-- End - Review Comment list-->
+                                    <!-- Start - Review Comment Reply-->
+                                    <ul class="comment-reply">
+                                        {% for child_rev in review.postreview_set.all %}
+                                            <li class="comment-reply-list">
+                                                <div class="comment-wrapper">
+                                                    <div class="comment-img">
+                                                        <img src="{% static 'images/user/image-2.png' %}" alt="">
+                                                    </div>
+                                                    <div class="comment-content">
+                                                        <div class="comment-content-top">
+                                                            <div class="comment-content-left">
+                                                                <h6 class="comment-name">{{ child_rev.name }}</h6>
+                                                            </div>
+                                                            <div class="comment-content-right">
+                                                                <a href="#addComment"
+                                                                   onclick="addPostReview('{{ review.name }}', '{{ review.id }}')">
+                                                                    <i class="fa fa-reply"></i>Reply
+                                                                </a>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="para-content">
+                                                            <p>{{ child_rev.text }}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        {% endfor %}
+
+                                    </ul> <!-- End - Review Comment Reply-->
+                                </li> <!-- End - Review Comment list-->
+                            {% endfor %}
+
                         </ul> <!-- End - Review Comment -->
 
                         <!-- Start comment Form -->
                         <div class="comment-form">
                             <div class="coment-form-text-top mt-30">
                                 <h4>Leave a Reply</h4>
-                                <p>Your email address will not be published. Required fields are marked *</p>
                             </div>
 
-                            <form action="#" method="post">
+                            <form id="addComment" action="{% url 'add_post_review' post.id %}" method="post">
+                                {% csrf_token %}
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="default-form-box mb-20">
-                                            <label for="comment-name">Your name <span>*</span></label>
-                                            <input id="comment-name" type="text" placeholder="Enter your name" required>
+                                    <input type="hidden" name="parent" id="parent-comment" value="">
+                                    {% if request.user.is_authenticated %}
+                                        <input name="customer" type="hidden" value="{{ request.user.id }}">
+                                        <input name="name" id="comment-name" type="hidden"
+                                               value="{{ request.user.username }}">
+                                        <input name="email" id="comment-email" type="hidden"
+                                               value="{{ request.user.email }}">
+                                    {% else %}
+                                        <div class="col-md-6">
+                                            <div class="default-form-box mb-20">
+                                                <label for="comment-name">Your name<span>*</span></label>
+                                                <input name="name" id="comment-name" type="text"
+                                                       placeholder="Enter your name" required>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="default-form-box mb-20">
-                                            <label for="comment-email">Your Email <span>*</span></label>
-                                            <input id="comment-email" type="email" placeholder="Enter your email"
-                                                   required>
+                                        <div class="col-md-6">
+                                            <div class="default-form-box mb-20">
+                                                <label for="comment-email">Your Email <span>*</span></label>
+                                                <input name="email" id="comment-email" type="email"
+                                                       placeholder="Enter your email" required>
+                                            </div>
                                         </div>
-                                    </div>
+                                    {% endif %}
                                     <div class="col-12">
                                         <div class="default-form-box mb-20">
                                             <label for="comment-review-text">Your review <span>*</span></label>
-                                            <textarea id="comment-review-text" placeholder="Write a review"
+                                            <textarea name="text" id="comment-review-text" placeholder="Write a review"
                                                       required></textarea>
                                         </div>
                                     </div>
@@ -270,4 +251,11 @@
             </div>
         </div>
     </div> <!-- ...:::: End Blog Single Section:::... -->
+
+    <script type="text/javascript">
+        function addPostReview(user, id) {
+            document.getElementById("parent-comment").value = id;
+            document.getElementById("comment-review-text").innerText = `${user}, `
+        }
+    </script>
 {% endblock content %}

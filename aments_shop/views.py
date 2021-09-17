@@ -5,7 +5,7 @@ from django.views.generic import ListView, DetailView
 
 from shop import settings
 from .filters import ProductsFilterClass
-from .forms import ProductReviewForm
+from .forms import ProductReviewForm, PostReviewForm
 from .models import Product, CustomUser, Post, Category
 
 
@@ -87,3 +87,20 @@ class AddProductReview(View):
 			form.product = product
 			form.save()
 		return redirect(product.get_absolute_url())
+
+
+class AddPostReview(View):
+	"""Добавленние отзыва к посту"""
+
+	def post(self, request, pk):
+		form = PostReviewForm(request.POST)
+		post = Post.objects.get(id=pk)
+		print(form.is_valid())
+		print(request.POST)
+		if form.is_valid():
+			form = form.save(commit=False)
+			if request.POST.get('parent', None):
+				form.parent_id = int(request.POST.get('parent'))
+			form.post = post
+			form.save()
+		return redirect(post.get_absolute_url())
