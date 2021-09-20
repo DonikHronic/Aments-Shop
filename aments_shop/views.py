@@ -5,7 +5,7 @@ from django.views.generic import ListView, DetailView
 
 from shop import settings
 from .filters import ProductsFilterClass
-from .forms import ProductReviewForm, PostReviewForm
+from .forms import ProductReviewForm, PostReviewForm, CustomerForm, CustomUserForm
 from .models import Product, CustomUser, Post, Category
 
 
@@ -26,13 +26,14 @@ class ProductView(ListView):
 		context = super().get_context_data(**kwargs)
 		context['categories'] = Category.objects.all()
 		context['colors'] = Product.get_colors()
+		context['products_count'] = Product.objects.count()
 		return context
 
 	def get_queryset(self):
 		if self.request.method == 'GET':
 			filter_products = ProductsFilterClass(**self.request.GET)
 			return filter_products.parse_datas()
-		return Product.objects.all()
+		return Product.objects.filter(draft=False)
 
 
 class ProductDetailView(DetailView):
@@ -58,6 +59,10 @@ def registration(request):
 @login_required
 def account(request):
 	context = {}
+	customer_form = CustomerForm()
+	context['customer_form'] = customer_form
+	user_form = CustomUserForm()
+	context['user_form'] = user_form
 	return render(request, 'registration/my-account.html', context)
 
 

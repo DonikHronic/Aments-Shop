@@ -2,10 +2,10 @@ from aments_shop.models import Product
 from shop import settings
 
 
-class ShoppingCart(object):
+class ProductCookies(object):
 	def __init__(self, request):
 		"""
-		Инициализация объекта корзины
+		Инициализация объекта куки
 		:param request: Принимает request из запроса
 		"""
 		self.session = request.session
@@ -64,3 +64,23 @@ class ShoppingCart(object):
 		"""
 		del self.cart[settings.SHOPPING_CART_SESSION_ID]
 		self.save()
+
+
+class ShoppingCart(ProductCookies):
+	"""Класс корзины"""
+
+	def __init__(self, request):
+		super().__init__(request)
+
+	def __repr__(self):
+		return 'Корзина покупателя'
+
+
+class WishList(ProductCookies):
+	"""Класс списка желаемого"""
+
+	def __init__(self, request):
+		super().__init__(request)
+
+	def __repr__(self):
+		return 'Список желаемого покупателя'

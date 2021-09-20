@@ -14,7 +14,7 @@ class ProductsFilterClass:
 	def parse_datas(self):
 		objects = Product.objects
 		filtered_fields = ProductsFilterClass.get_model_fields(Product)
-		filtering_dict = {}
+		filtering_dict = {'draft': False}
 		for key, value in self.kwargs.items():
 			key = ''.join(re.findall(r'[a-zA-Z]+', key))
 
@@ -33,7 +33,7 @@ class ProductsFilterClass:
 class CommandFilter:
 	@staticmethod
 	def get_new_deliveries():
-		return Product.objects.filter(date__gte=datetime.today() - timedelta(days=7))
+		return Product.objects.filter(date__gte=datetime.today() - timedelta(days=7), draft=False)
 
 	@staticmethod
 	def get_new_posts():
@@ -42,7 +42,7 @@ class CommandFilter:
 	@staticmethod
 	def get_popular_product():
 		popular_products_list = [product.product.id for product in ProductAnalytics.objects.filter(views__gte=10)[:10]]
-		return Product.objects.filter(id__in=popular_products_list)
+		return Product.objects.filter(id__in=popular_products_list, draft=False)
 
 	@staticmethod
 	def get_related_products():
@@ -50,7 +50,7 @@ class CommandFilter:
 
 	@staticmethod
 	def get_product_on_sale():
-		return Product.objects.filter(sale__isnull=False)
+		return Product.objects.filter(sale__isnull=False, draft=False)
 
 
 class ProductApiFilter(CommandFilter):

@@ -238,14 +238,13 @@
                                                 <form action="{% url 'add_product_review' product.id %}" method="post">
                                                     <input type="hidden" name="parent" id="contactParent" value="">
                                                     {% csrf_token %}
-                                                    <input type="text" name="customer" value="{{ request.user.id }}"
-                                                           hidden>
+                                                    <input type="hidden" name="customer" value="{{ request.user.id }}">
                                                     <div class="row mt-3">
                                                         <div class="col-12">
                                                             <div class="default-form-box mb-20">
                                                                 <textarea name="text" id="comment-review-text"
-                                                                          placeholder="Write a review"
-                                                                          required></textarea>
+                                                                          placeholder="Write a review" required>
+                                                                </textarea>
                                                             </div>
                                                         </div>
                                                         <div class="col-12">

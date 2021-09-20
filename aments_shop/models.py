@@ -2,7 +2,10 @@ from datetime import datetime
 
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin, UserManager
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.forms import model_to_dict
 from django.urls import reverse
 
@@ -76,6 +79,8 @@ class Product(models.Model):
 		Category, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Категория',
 		related_name='product_in_category'
 	)
+	in_stock = models.BooleanField('В наличии', default=True)
+	draft = models.BooleanField('Черновик', default=True)
 	url = models.SlugField('Ссылка', max_length=250, unique=True)
 
 	def __str__(self):
@@ -238,13 +243,13 @@ class Characteristic(models.Model):
 class Customer(models.Model):
 	"""Покупатель"""
 
-	user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+	user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='customer')
 	address = models.ForeignKey('Address', on_delete=models.SET_NULL, null=True, blank=True)
-	first_name = models.CharField('Имя', max_length=50)
-	second_name = models.CharField('Фамилия', max_length=50)
+	first_name = models.CharField('Имя', max_length=50, null=True, blank=True)
+	second_name = models.CharField('Фамилия', max_length=50, null=True, blank=True)
 
 	def __str__(self):
-		return self.user
+		return f'{self.user}'
 
 	class Meta:
 		db_table = 'customer'
@@ -357,3 +362,9 @@ class PostReview(models.Model):
 		db_table = 'post_reviews'
 		verbose_name = 'Отзыв к посту'
 		verbose_name_plural = 'Отзывы к посту'
+
+
+@receiver(post_save, sender=CustomUser)
+def save_or_create_customer(sender, instance, created, **kwargs):
+	if created:
+		Customer.objects.create(user=instance)
