@@ -7,6 +7,7 @@ urlpatterns = [
 	path('', include('aments_shop.api.urls')),
 	path('register/', views.registration, name='registration'),
 	path('accounts/', views.account, name='profile'),
+	path('accounts/cart/', views.shopping_cart, name='cart_detail'),
 	path('products/', views.ProductView.as_view(), name='products'),
 	path('products/<slug:slug>/', views.ProductDetailView.as_view(), name='product_detail'),
 	path('posts/', views.PostView.as_view(), name='posts'),

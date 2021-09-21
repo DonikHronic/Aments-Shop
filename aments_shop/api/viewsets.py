@@ -99,9 +99,21 @@ def remove_from_cart(request, product_id):
 @api_view(['GET'])
 def shopping_cart(request):
 	"""
-	Корзина пользователя
+	Корзина пользователя для API
 	:param request:
-	:return: Возвращает страницу корзины
+	:return: Возвращает данные в виде Response
 	"""
 	cart = ShoppingCart(request)
-	return render(request, 'aments_shop/cart.html', {'shopping_cart': cart})
+	cart_items = [product for product in cart]
+	total_price = 0
+
+	for item in cart_items:
+		if item['product'].sales:
+			total_price += item['count'] * item['product'].price * (1 - item['product'].sales.value / 100)
+		else:
+			total_price += item['count'] * item['product'].price
+		item['product'] = ProductSerializer(item['product']).data
+
+	cart_items.append(round(total_price, 2))
+
+	return Response(cart_items)

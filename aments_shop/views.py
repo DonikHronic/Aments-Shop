@@ -4,6 +4,7 @@ from django.views import View
 from django.views.generic import ListView, DetailView
 
 from shop import settings
+from .favorites import ShoppingCart
 from .filters import ProductsFilterClass
 from .forms import ProductReviewForm, PostReviewForm, CustomerForm, CustomUserForm
 from .models import Product, CustomUser, Post, Category
@@ -64,6 +65,24 @@ def account(request):
 	user_form = CustomUserForm()
 	context['user_form'] = user_form
 	return render(request, 'registration/my-account.html', context)
+
+
+def shopping_cart(request):
+	"""
+	Корзина пользователя
+	:param request:
+	:return: Возвращает страницу корзины
+	"""
+	cart = ShoppingCart(request)
+	total_price = 0
+
+	for item in cart:
+		if item['product'].sales:
+			total_price += item['count'] * item['product'].price * (1 - item['product'].sales.value / 100)
+		else:
+			total_price += item['count'] * item['product'].price
+
+	return render(request, 'aments_shop/cart.html', {'shopping_cart': cart, 'total_price': round(total_price, 2)})
 
 
 class PostView(ListView):

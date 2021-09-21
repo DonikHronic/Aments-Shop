@@ -61,13 +61,16 @@
                                                     <div class="col-12">
                                                         <!-- Start Product Defautlt Single -->
                                                         <div class="product-list-single border-around">
-                                                            <a href="product_detail.html" class="product-list-img-link">
+                                                            <a href="{{ product.get_absolute_url }}"
+                                                               class="product-list-img-link">
                                                                 <img src="{{ product.preview.url }}" alt=""
                                                                      class="img-fluid">
                                                             </a>
                                                             <div class="product-list-content">
                                                                 <h5 class="product-list-link">
-                                                                    <a href="product_detail.html">{{ product.name }}</a>
+                                                                    <a href="{{ product.get_absolute_url }}">
+                                                                        {{ product.name }}
+                                                                    </a>
                                                                 </h5>
                                                                 <span class="product-list-price">
                                                                     {% if product.sales %}
@@ -92,13 +95,8 @@
                                                                                 <i class="icon-repeat"></i>
                                                                             </a>
                                                                         </li>
-                                                                        <li>
-                                                                            <a href="#" data-toggle="modal"
-                                                                               data-target="#modalQuickview">
-                                                                                <i class="icon-eye"></i>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
+                                                                        <li class="add_to_cart"
+                                                                            data-id="{{ product.id }}">
                                                                             <a href="#" data-toggle="modal"
                                                                                data-target="#modalAddcart">
                                                                                 <i class="icon-shopping-cart"></i>

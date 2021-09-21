@@ -28,7 +28,8 @@ class ProductCookies(object):
 		if product_id not in self.cart:
 			self.cart[product_id] = {
 				'id': product_id,
-				'name': product.name
+				'name': product.name,
+				'count': 1
 			}
 		self.save()
 
