@@ -8,6 +8,7 @@ class ProductCookies(object):
 		Инициализация объекта куки
 		:param request: Принимает request из запроса
 		"""
+		self.request = request
 		self.session = request.session
 		cart = self.session.get(settings.SHOPPING_CART_SESSION_ID)
 		if not cart:
@@ -25,11 +26,12 @@ class ProductCookies(object):
 		:param product: Принимает объект продукта из базы
 		"""
 		product_id = str(product.id)
+		count = int(self.request.GET.get('count', 1))
 		if product_id not in self.cart:
 			self.cart[product_id] = {
 				'id': product_id,
 				'name': product.name,
-				'count': 1
+				'count': count
 			}
 		self.save()
 

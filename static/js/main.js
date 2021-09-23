@@ -253,10 +253,17 @@
 		$('.add_to_cart').click(function () {
 			let id_par = $(this).parents('.product-img-warp');
 			let id = id_par.attr('data-id');
+			let countValue = document.getElementById('products-count');
+			let product_count = 1
+
+			if (countValue)
+				product_count = countValue.value;
+
 			if (!id) {
 				id = $(this).attr('data-id');
 			}
-			let url = '/accounts/cart/add/' + String(id);
+
+			let url = `/accounts/cart/add/${String(id)}?count=${product_count}`;
 			$.get(url).done(function (data) {
 				console.log('success');
 			});
