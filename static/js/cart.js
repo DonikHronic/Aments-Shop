@@ -3,6 +3,7 @@ $(function () {
 		$.get('/accounts/cart-api/').done(function (data) {
 			let cart_modal = $('#modal_cart')
 			let cart_item = ''
+			console.log(data)
 			for (let dataKey in data) {
 				if (typeof (data[dataKey]) == "number") {
 					$('#total-cart-price').text(`$${data[dataKey]}`)
@@ -29,7 +30,7 @@ $(function () {
 							</div>
 						</div>
 						<div class="offcanvas-cart-item-delete text-right delete-item">
-							<a href="accounts/cart/remove/${data[dataKey]['id']}" class="offcanvas-cart-item-delete">
+							<a href="/accounts/cart/remove/${data[dataKey]['id']}" class="offcanvas-cart-item-delete">
 								<i class="fa fa-trash-o"></i>
 							</a>
 						</div>
